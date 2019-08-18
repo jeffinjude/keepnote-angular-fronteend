@@ -1,0 +1,7 @@
+<mat-card appHovereffect class="note-card"> <!-- appHovereffect logic in hovereffect.directive.ts file -->
+    <!-- Interpolation to get the values of note object variables -->
+    <mat-card-title>{{note.title}}</mat-card-title>
+    <mat-card-content>{{note.text}}</mat-card-content>
+    <button class="editButton" (click)="openEditNoteView()">Edit</button>
+    <button class="deleteButton" (click)="deleteNote()">Delete</button>
+</mat-card>

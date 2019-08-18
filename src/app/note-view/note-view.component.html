@@ -1,0 +1,15 @@
+<div class="keep-c-note-container">
+	<!--
+	<div class="notes-card-container">
+		<mat-list *ngFor="let note of notes">
+			<mat-list-item>
+				
+			</mat-list-item>
+		</mat-list>
+	</div>
+	-->
+	<!-- Include the notes collection with each note rendered as a separate NoteComponent -->
+	<!-- Load and display the collection of notes from server as Material Cards with card title set to note title and card content set to note text  -->
+	<!-- We pass the note object data to Note component. This is retrieve using @Input in the ts file  of note component -->
+	<app-note [note]="note" *ngFor="let note of notes" class="note-card"></app-note>
+</div>

@@ -1,0 +1,42 @@
+<!-- Label to display any error messages -->
+<label class="error-message">{{ errMessage }}</label>
+
+<!-- To add notes -->
+<div class="note-container">
+    <!-- Expansion panel to add new notes -->
+    <!-- We use prebuilt angular material modules, the apis for which 
+           are imported in app.module.ts file so that we could acces them -->
+    <mat-expansion-panel class="mat-expansion-panel">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Take a note
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="note-form">
+            <!-- We use Reactive form, refer edit note view component for template driven form example -->
+            <!-- We need to use formGroup attribute -->
+            <form class="note-form" [formGroup]="noteForm" (ngSubmit)="addNote(noteForm)">
+                <mat-form-field>
+                    <!-- We need to use formControlName directive for reactive forms correspnding to ngmodel in template driven forms -->
+                    <input matInput name="title" placeholder="Enter Title" formControlName="title">
+                    <!-- touch property will validate after the cursor is placed and then removed -->
+                    <mat-error *ngIf="noteForm.get('title').touched && noteForm.get('title').hasError('required')">
+                        Title must not be empty.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea matInput name="text" placeholder="Enter Description" formControlName="text"></textarea>
+                    <!-- dirty property will validate after some data is entered in the field -->
+                    <mat-error *ngIf="noteForm.get('text').dirty && noteForm.get('text').hasError('required')">
+                        Description must not be empty.
+                    </mat-error>
+                    <mat-error *ngIf="noteForm.get('text').dirty && noteForm.get('text').hasError('minlength')">
+                        Description must be of minlength 6.
+                    </mat-error>
+                </mat-form-field>
+                <!-- If no type is given default type is submit. Also enable it only if form input values are valid -->
+                <button mat-button type="submit" [disabled]="!noteForm.valid">Done</button>
+            </form>
+        </div>
+    </mat-expansion-panel>
+</div>

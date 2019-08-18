@@ -1,0 +1,34 @@
+{
+  "notes": [
+    {
+      "title": "Call Ravi",
+      "text": "Track the new submissions",
+      "state": "not-started",
+      "id": 1
+    },
+    {
+      "title": "Capitalism",
+      "text": "Mark Twain",
+      "state": "started",
+      "id": 2
+    },
+    {
+      "title": "Read Angular 1 blog",
+      "text": "Shall do at 10.30 pm",
+      "state": "not-started",
+      "id": 3
+    },
+    {
+      "title": "test",
+      "text": "test",
+      "state": "not-started",
+      "id": 4
+    },
+    {
+      "title": "test2",
+      "text": "test2",
+      "state": "completed",
+      "id": 5
+    }
+  ]
+}

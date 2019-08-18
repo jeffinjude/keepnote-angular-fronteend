@@ -1,0 +1,8 @@
+/* CSS for login component */
+.login-form
+{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}

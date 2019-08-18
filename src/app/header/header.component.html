@@ -1,0 +1,9 @@
+<!-- The html for header component -->
+<!-- We are importing the api for prebuilt material toolbar
+     in the app.module.ts file -->
+<mat-toolbar color="primary">Keep
+	<div class="keep-c-toggle-view">
+		<i *ngIf="isNoteView" class="material-icons switchToListView" (click)="openListView()">view_list</i>
+		<i *ngIf="!isNoteView" class="material-icons switchToNoteView" (click)="openNoteView()">view_quilt</i>
+	</div>
+</mat-toolbar>

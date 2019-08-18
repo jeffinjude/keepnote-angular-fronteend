@@ -1,0 +1,27 @@
+<!-- Label to display any error messages -->
+<strong *ngIf="submitMessage" class="error-message">{{submitMessage}}</strong>
+
+<!-- Html for login component -->
+<div class="login-form">
+    <!-- Reactive form -->
+    <!-- We need to use formGroup attribute -->
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginSubmit(loginForm)">
+        <mat-form-field>
+            <!-- We need to use formControlName directive -->
+            <input  class="username" matInput name="username" placeholder="Enter Username" formControlName="username">
+            <!-- touch property will validate after the cursor is placed and then removed -->
+            <mat-error *ngIf="loginForm.get('username').touched && loginForm.get('username').hasError('required')">
+                Username must not be empty.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input class="password" matInput type="password" name="password" placeholder="Enter Password" formControlName="password">
+            <!-- dirty property will validate after some data is entered in the field -->
+            <mat-error *ngIf="loginForm.get('password').touched && loginForm.get('password').hasError('required')">
+                Password must not be empty.
+            </mat-error>
+        </mat-form-field>
+        <!-- If no type is given default type is submit. Also enable it only if form is valid -->
+        <button mat-button type="submit" [disabled]="loginForm.invalid">Submit</button>
+    </form>
+</div>

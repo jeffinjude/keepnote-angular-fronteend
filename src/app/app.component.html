@@ -1,0 +1,19 @@
+<!-- Html of app component -->
+<!-- HeaderComponent to be displayed as part of AppComponent -->
+<app-header></app-header>
+
+<!-- Login/Dashboard component to be rendered based on route -->
+<div>
+    <p>
+        <a routerLink='login'>
+            {{loginLogoutText}}
+        </a> <!-- Specify the routerLink as the path specified in app.module.ts -->
+    </p>
+    <p>
+        <a routerLink='dashboard'>Notes</a>
+    </p>
+</div>
+
+<!-- Selector for the router to work. This acts as a placeholder where angular displays the router content -->
+<!-- Here login or dashboard components are loaded. Refer routes in app.module.ts -->
+<router-outlet></router-outlet>

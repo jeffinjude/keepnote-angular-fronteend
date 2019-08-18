@@ -1,0 +1,27 @@
+/* The css for dashboard component */
+.note-container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mat-expansion-panel
+{
+    margin:0 auto;
+    width: 70vw;
+}
+
+.note-form
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.notes-card-container
+{
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

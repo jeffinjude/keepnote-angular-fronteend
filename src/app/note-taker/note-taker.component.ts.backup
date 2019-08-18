@@ -1,0 +1,75 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Note } from '../note';
+import { FormGroup, FormGroupDirective, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
+import { NotesService } from '../services/notes.service';
+
+@Component({
+  selector: 'app-note-taker',
+  templateUrl: './note-taker.component.html',
+  styleUrls: ['./note-taker.component.css']
+})
+
+// Component that handles the note add process - This was done using reactive form.
+export class NoteTakerComponent implements OnInit {
+  errMessage: string;
+  public note: Note;
+  public notes: Note[];
+
+  /* The name should match with what is given in html template file for formGroup attribute
+  i.e noteForm in line 18 of note-taker.component.html file */
+  public noteForm: FormGroup;
+
+  @ViewChild(FormGroupDirective)
+  formGroupDirective: FormGroupDirective; // To use the reset form functionality
+
+  /* Injecting the reference of form builder as a child of this component (and not via constructor) to make the test pass,
+  since formbuilder is not imported in the test bed. Refer line 78 of dashboard.component.spec.ts */
+  @ViewChild(FormBuilder)
+  formBuilder: FormBuilder = new FormBuilder();
+
+  /* Inject the required servies */
+  // constructor(public authService: AuthenticationService, public noteService: NotesService, public formBuilder: FormBuilder) {
+  constructor(public authService: AuthenticationService, public noteService: NotesService) {
+    this.note = new Note(); // Create a note obj
+    this.notes = []; // Initialize the note array
+    // For reactive forms we take the formgroup instance (binded with [formGroup] in html) and append the validators
+    this.noteForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      text: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+    });
+  }
+
+  // Executes on component load
+  ngOnInit() {
+
+  }
+
+  // Method to save the note
+  addNote(noteForm: FormGroup) {
+    // The input values in the form will be available in noteForm.value as a json.
+    const noteObj: Note = new Note();
+    noteObj.title = noteForm.value.title;
+    noteObj.text = noteForm.value.text;
+    noteObj.state = 'not-started'; // Initially the note state will be always as not-started
+
+    if (!noteForm.invalid) {
+      this.errMessage = '';
+
+      /* We push it to notes array so that UI is updated without page reload.
+      If not done, the newly added value is saved in db but not update in UI without page reload */
+      this.notes.push(noteObj);
+      // console.log(this.notes);
+
+      /* Call the noteservice to save the note obj to db */
+      this.noteService.addNote(noteObj).subscribe(
+        data => {
+          // console.log('Note added through Note Service.');
+        },
+        err => this.errMessage = err.message
+      );
+
+      this.formGroupDirective.resetForm(); // To reset form values after submission
+    }
+  }
+}
